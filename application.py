@@ -47,6 +47,7 @@ def index():
 
 
 if __name__ == '__main__':
+    app.run()
     ## -------------- SETUP ELASTICSEARCH -------------- ##
     es = Elasticsearch()
     es.indices.create(index='twitter',ignore = 400)
@@ -62,5 +63,5 @@ if __name__ == '__main__':
     stream = Stream(auth, l)
     setTerms = ['DecisionDay','Vikings','NYCFC','Flacco','TheWalkingDead','pizza','NEvsPIT','patriots','ComeTvwithUs','Trump']
     stream.filter(track=setTerms,async=True)
-    app.run()
+
 
