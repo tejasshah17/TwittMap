@@ -39,7 +39,8 @@ class StdOutListener(StreamListener):
         """Called when an unhandled exception occurs."""
         return
 
-app = Flask(__name__)
+application = Flask(__name__)
+app = application
 
 @app.route('/')
 def index():

@@ -1,6 +1,6 @@
 branch-defaults:
   master:
-    environment: TwittMapEnv
+    environment: TwittMapEnvironment
     group_suffix: null
 global:
   application_name: TwittMap
