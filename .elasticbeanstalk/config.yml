@@ -1,0 +1,13 @@
+branch-defaults:
+  master:
+    environment: TwittMapEnv
+    group_suffix: null
+global:
+  application_name: TwittMap
+  branch: null
+  default_ec2_keyname: TejasCloud
+  default_platform: Python 2.7
+  default_region: us-west-2
+  profile: null
+  repository: null
+  sc: git
