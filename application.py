@@ -4,9 +4,8 @@ from tweepy import Stream
 from elasticsearch import Elasticsearch
 import time
 from flask import Flask
-
-
 import json
+
 _CONSUMER_KEY = 'IDRWiVEJxA5BLbbLxfK5HVkjd'
 _CONSUMER_SEC_KEY = 'RKCIS6bcVxIULPOPbaYsNkqbJco6rifTtsckUstXVOqCfiGR67'
 _ACCESS_TOKEN = '789914399427403776-GZZAcCDOMIqS9fbDIRMsISam1D7oLWY'
@@ -26,8 +25,6 @@ class StdOutListener(StreamListener):
                 print jsonData
                 return True
 
-
-
     def on_error(self, status):
         print(status)
         if status == 420:
@@ -41,16 +38,20 @@ class StdOutListener(StreamListener):
 
 application = Flask(__name__)
 app = application
+es = Elasticsearch()
+
 
 @app.route('/')
 def index():
-    return 'Welcome to TwitterTrends HomePage'
+    if es.indices.exists(index='twitter'):
+        return 'Welcome to TwitterTrends HomePage <br> True'
+    else:
+        return  'Welcome to TwitterTrends HomePage <br> False'
 
 
 if __name__ == '__main__':
-    app.run()
     ## -------------- SETUP ELASTICSEARCH -------------- ##
-    es = Elasticsearch()
+    # es = Elasticsearch()
     es.indices.create(index='twitter',ignore = 400)
 
 
@@ -64,5 +65,7 @@ if __name__ == '__main__':
     stream = Stream(auth, l)
     setTerms = ['DecisionDay','Vikings','NYCFC','Flacco','TheWalkingDead','pizza','NEvsPIT','patriots','ComeTvwithUs','Trump']
     stream.filter(track=setTerms,async=True)
+    app.run()
+
 
 
