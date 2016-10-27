@@ -75,8 +75,8 @@ if __name__ == '__main__':
 
     stream = Stream(auth, l)
     setTerms = ['QueenSugar','NicerRap','GOT','FlytheW','TheWalkingDead','pizza','Instagram','DesignatedSurvivor','Food','Trump']
-    #stream.filter(track=setTerms,async=True)
-    app.run(debug=True)
+    stream.filter(track=setTerms,async=True)
+    app.run()
 
 
 
