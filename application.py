@@ -42,16 +42,13 @@ setTerms = []
 
 @app.route('/')
 def index():
-    try:
-        if es.indices.exists(index='twitter'):
-            searchtext = setTerms[0]
-            response = es.search(index='twitter',doc_type='tweet',body={"query":{"query_string":{"query":searchtext}}},size =3000)
-            data = {'searchParams' : setTerms, 'tweets': response['hits']['hits'] }
-            return render_template('index.html',data=data)
-        else:
-            return 'Welcome to TwitterTrends HomePage <br> False'
-    except Exception:
-        print Exception.message
+    if es.indices.exists(index='twitter'):
+        searchtext = setTerms[0]
+        response = es.search(index='twitter',doc_type='tweet',body={"query":{"query_string":{"query":searchtext}}},size =3000)
+        data = {'searchParams' : setTerms, 'tweets': response['hits']['hits'] }
+        return render_template('index.html',data=data)
+    else:
+        return 'Welcome to TwitterTrends HomePage <br> False'
 
 @app.route('/',methods=['POST'])
 def search():
