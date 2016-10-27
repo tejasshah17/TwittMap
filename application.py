@@ -44,39 +44,47 @@ es = Elasticsearch()
 
 @app.route('/')
 def index():
-    if es.indices.exists(index='twitter'):
-        searchtext = setTerms[0]
-        response = es.search(index='twitter',doc_type='tweet',body={"query":{"query_string":{"query":searchtext,"fields":["text"]}}})
-        data = {'searchParams' : setTerms, 'tweets': response['hits']['hits'] }
-        return render_template('index.html',data=data)
-    else:
-        return 'Welcome to TwitterTrends HomePage <br> False'
-
+    try:
+        if es.indices.exists(index='twitter'):
+            searchtext = setTerms[0]
+            response = es.search(index='twitter',doc_type='tweet',body={"query":{"query_string":{"query":searchtext}}},size =3000)
+            data = {'searchParams' : setTerms, 'tweets': response['hits']['hits'] }
+            return render_template('index.html',data=data)
+        else:
+            return 'Welcome to TwitterTrends HomePage <br> False'
+    except Exception:
+        print Exception.message
 
 @app.route('/',methods=['POST'])
 def search():
-    searchtext = request.form['TrendKeyword']
-    response = es.search(index='twitter', doc_type='tweet',body={"query": {"query_string": {"query": searchtext, "fields": ["text"]}}})
-    data = {'searchParams': setTerms, 'tweets': response['hits']['hits'],'currentSearch':searchtext}
-    return render_template('index.html', data=data)
+    try:
+        searchtext = request.form['TrendKeyword']
+        response = es.search(index='twitter', doc_type='tweet',body={"query": {"query_string": {"query": searchtext}}},size=3000)
+        data = {'searchParams': setTerms, 'tweets': response['hits']['hits'], 'currentSearch': searchtext}
+        return render_template('index.html', data=data)
+    except Exception:
+        print Exception.message
 
 if __name__ == '__main__':
     ## -------------- SETUP ELASTICSEARCH -------------- ##
     # es = Elasticsearch()
-    es.indices.create(index='twitter',ignore = 400)
+    try:
+        es.indices.create(index='twitter', ignore=400)
 
+        ## ------------- START TWITTER API STREAMING -------------##
+        l = StdOutListener()
+        auth = tweepy.OAuthHandler(_CONSUMER_KEY, _CONSUMER_SEC_KEY)
+        auth.set_access_token(_ACCESS_TOKEN, _ACCESS_TOKEN_SECRET)
+        api = tweepy.API(auth)
 
+        stream = Stream(auth, l)
+        setTerms = ['QueenSugar', 'NicerRap', 'GOT', 'FlytheW', 'TheWalkingDead', 'pizza', 'Instagram',
+                    'DesignatedSurvivor', 'Food', 'Trump']
+        stream.filter(track=setTerms, async=True)
+        app.run()
+    except Exception:
+        print Exception.message
 
-    ## ------------- START TWITTER API STREAMING -------------##
-    l = StdOutListener()
-    auth = tweepy.OAuthHandler(_CONSUMER_KEY, _CONSUMER_SEC_KEY)
-    auth.set_access_token(_ACCESS_TOKEN, _ACCESS_TOKEN_SECRET)
-    api = tweepy.API(auth)
-
-    stream = Stream(auth, l)
-    setTerms = ['QueenSugar','NicerRap','GOT','FlytheW','TheWalkingDead','pizza','Instagram','DesignatedSurvivor','Food','Trump']
-    stream.filter(track=setTerms,async=True)
-    app.run()
 
 
 

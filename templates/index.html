@@ -29,6 +29,7 @@
             <input type="submit" value="Search Tweets">
         </form>
     </p>
+    {{data.tweets|length}}
 
     <div id="map"></div>
     <script>
@@ -38,7 +39,7 @@
           zoom: 2,
           minZoom: 1
         });
-
+        console.log({{data.tweets|length}})
         {% for tweet in data.tweets %}
             var marker = new google.maps.Marker({
                 position: {
