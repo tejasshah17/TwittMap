@@ -38,7 +38,8 @@ class StdOutListener(StreamListener):
 application = Flask(__name__)
 app = application
 es = Elasticsearch()
-setTerms = []
+setTerms = ['QueenSugar', 'NicerRap', 'GOT', 'FlytheW', 'TheWalkingDead', 'pizza', 'Instagram',
+                    'DesignatedSurvivor', 'Food', 'Trump']
 
 @app.route('/')
 def index():
@@ -73,8 +74,7 @@ if __name__ == '__main__':
         api = tweepy.API(auth)
 
         stream = Stream(auth, l)
-        setTerms = ['QueenSugar', 'NicerRap', 'GOT', 'FlytheW', 'TheWalkingDead', 'pizza', 'Instagram',
-                    'DesignatedSurvivor', 'Food', 'Trump']
+
         stream.filter(track=setTerms, async=True)
         app.run()
     except Exception:
