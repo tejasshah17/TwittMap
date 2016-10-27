@@ -20,10 +20,8 @@ class StdOutListener(StreamListener):
             # return True
             jsonData = json.loads(data)
             if 'contributors' in jsonData and jsonData['geo'] is not None:
-                #print jsonData['user']['name'] +  " - "  + jsonData['text']
-                #print jsonData
                 es.index(index='twitter',doc_type='tweet',body=jsonData)
-                print jsonData
+                #print jsonData
                 return True
 
     def on_error(self, status):
