@@ -38,7 +38,7 @@ class StdOutListener(StreamListener):
 application = Flask(__name__)
 app = application
 es = Elasticsearch()
-
+setTerms = []
 
 @app.route('/')
 def index():
