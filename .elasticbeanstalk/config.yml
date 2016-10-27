@@ -1,13 +1,14 @@
 branch-defaults:
   master:
-    environment: null
-    group_suffix: null
+    environment: TweetMap
+environment-defaults:
+  TweetMap:
+    branch: null
+    repository: null
 global:
-  application_name: tweetMap
-  branch: null
-  default_ec2_keyname: TejasCloud
-  default_platform: python2.7
+  application_name: TwitterMap
+  default_ec2_keyname: null
+  default_platform: 64bit Amazon Linux 2016.03 v2.1.6 running Python 2.7
   default_region: us-west-2
   profile: null
-  repository: null
   sc: git

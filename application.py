@@ -3,8 +3,9 @@ from tweepy.streaming import StreamListener
 from tweepy import Stream
 from elasticsearch import Elasticsearch
 import time
-from flask import Flask
+from flask import Flask,render_template,request
 import json
+import jinja2
 
 _CONSUMER_KEY = 'IDRWiVEJxA5BLbbLxfK5HVkjd'
 _CONSUMER_SEC_KEY = 'RKCIS6bcVxIULPOPbaYsNkqbJco6rifTtsckUstXVOqCfiGR67'
@@ -44,10 +45,20 @@ es = Elasticsearch()
 @app.route('/')
 def index():
     if es.indices.exists(index='twitter'):
-        return 'Welcome to TwitterTrends HomePage <br> True'
+        searchtext = setTerms[0]
+        response = es.search(index='twitter',doc_type='tweet',body={"query":{"query_string":{"query":searchtext,"fields":["text"]}}})
+        data = {'searchParams' : setTerms, 'tweets': response['hits']['hits'] }
+        return render_template('index.html',data=data)
     else:
-        return  'Welcome to TwitterTrends HomePage <br> False'
+        return 'Welcome to TwitterTrends HomePage <br> False'
 
+
+@app.route('/',methods=['POST'])
+def search():
+    searchtext = request.form['TrendKeyword']
+    response = es.search(index='twitter', doc_type='tweet',body={"query": {"query_string": {"query": searchtext, "fields": ["text"]}}})
+    data = {'searchParams': setTerms, 'tweets': response['hits']['hits'],'currentSearch':searchtext}
+    return render_template('index.html', data=data)
 
 if __name__ == '__main__':
     ## -------------- SETUP ELASTICSEARCH -------------- ##
@@ -63,9 +74,9 @@ if __name__ == '__main__':
     api = tweepy.API(auth)
 
     stream = Stream(auth, l)
-    setTerms = ['DecisionDay','Vikings','NYCFC','Flacco','TheWalkingDead','pizza','NEvsPIT','patriots','ComeTvwithUs','Trump']
-    stream.filter(track=setTerms,async=True)
-    app.run()
+    setTerms = ['QueenSugar','NicerRap','GOT','FlytheW','TheWalkingDead','pizza','Instagram','DesignatedSurvivor','Food','Trump']
+    #stream.filter(track=setTerms,async=True)
+    app.run(debug=True)
 
 
 
