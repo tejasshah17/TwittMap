@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8439a59b-4ee6-418d-b8d0-51b5e98eab38" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application.py" afterPath="$PROJECT_DIR$/application.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/index.html" afterPath="$PROJECT_DIR$/templates/index.html" />
     </list>
     <ignored path="TwittMap.iws" />
@@ -49,8 +48,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="60" column="22" selection-start-line="60" selection-start-column="22" selection-end-line="60" selection-end-column="22" />
+            <state relative-caret-position="88">
+              <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -476,7 +475,14 @@
       <option name="project" value="LOCAL" />
       <updated>1477665068897</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Post Submission Commit - 10/31/2016">
+      <created>1477894710914</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1477894710914</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -541,7 +547,8 @@
     <MESSAGE value="Commit - 3" />
     <MESSAGE value="Commit - 4&#10;" />
     <MESSAGE value="Post Submission Commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Post Submission Commit" />
+    <MESSAGE value="Post Submission Commit - 10/31/2016" />
+    <option name="LAST_COMMIT_MESSAGE" value="Post Submission Commit - 10/31/2016" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -897,8 +904,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="60" column="22" selection-start-line="60" selection-start-column="22" selection-end-line="60" selection-end-column="22" />
+        <state relative-caret-position="88">
+          <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
           <folding />
         </state>
       </provider>
