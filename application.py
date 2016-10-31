@@ -16,12 +16,10 @@ _ACCESS_TOKEN_SECRET = 'GbqFwczOAQfOtr8KQGfF5aoebWXQhfpOBKM3oGOrzbwmA'
 class StdOutListener(StreamListener):
     def on_data(self, data):
         if data != None:
-            # print data
-            # return True
             jsonData = json.loads(data)
             if 'contributors' in jsonData and jsonData['geo'] is not None:
                 es.index(index='twitter',doc_type='tweet',body=jsonData)
-                #print jsonData
+                print "Data Inserted"
                 return True
 
     def on_error(self, status):
@@ -37,15 +35,29 @@ class StdOutListener(StreamListener):
 
 application = Flask(__name__)
 app = application
+
+## -------------- SETUP ELASTICSEARCH -------------- ##
 es = Elasticsearch()
+es.indices.create(index='twitter', ignore=400)
+
+## ------------- START TWITTER API STREAMING -------------##
+l = StdOutListener()
+auth = tweepy.OAuthHandler(_CONSUMER_KEY, _CONSUMER_SEC_KEY)
+auth.set_access_token(_ACCESS_TOKEN, _ACCESS_TOKEN_SECRET)
+api = tweepy.API(auth)
+stream = Stream(auth, l)
+
 setTerms = ['QueenSugar', 'NicerRap', 'GOT', 'FlytheW', 'TheWalkingDead', 'pizza', 'Instagram',
                     'DesignatedSurvivor', 'Food', 'Trump']
+
+stream.filter(track=setTerms, async=True)
+
 
 @app.route('/')
 def index():
     if es.indices.exists(index='twitter'):
         searchtext = setTerms[0]
-        response = es.search(index='twitter',doc_type='tweet',body={"query":{"query_string":{"query":searchtext}}},size =3000)
+        response = es.search(index='twitter',doc_type='tweet',body={"query":{"query_string":{"query":searchtext}}},size =5000)
         data = {'searchParams' : setTerms, 'tweets': response['hits']['hits'] }
         return render_template('index.html',data=data)
     else:
@@ -55,31 +67,14 @@ def index():
 def search():
     try:
         searchtext = request.form['TrendKeyword']
-        response = es.search(index='twitter', doc_type='tweet',body={"query": {"query_string": {"query": searchtext}}},size=3000)
+        response = es.search(index='twitter', doc_type='tweet',body={"query": {"query_string": {"query": searchtext}}},size=5000)
         data = {'searchParams': setTerms, 'tweets': response['hits']['hits'], 'currentSearch': searchtext}
         return render_template('index.html', data=data)
     except Exception:
         print Exception.message
 
 if __name__ == '__main__':
-    ## -------------- SETUP ELASTICSEARCH -------------- ##
-    # es = Elasticsearch()
     try:
-        es.indices.create(index='twitter', ignore=400)
-
-        ## ------------- START TWITTER API STREAMING -------------##
-        l = StdOutListener()
-        auth = tweepy.OAuthHandler(_CONSUMER_KEY, _CONSUMER_SEC_KEY)
-        auth.set_access_token(_ACCESS_TOKEN, _ACCESS_TOKEN_SECRET)
-        api = tweepy.API(auth)
-
-        stream = Stream(auth, l)
-
-        stream.filter(track=setTerms, async=True)
         app.run()
     except Exception:
         print Exception.message
-
-
-
-
