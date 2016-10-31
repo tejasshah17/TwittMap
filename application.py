@@ -45,12 +45,14 @@ l = StdOutListener()
 auth = tweepy.OAuthHandler(_CONSUMER_KEY, _CONSUMER_SEC_KEY)
 auth.set_access_token(_ACCESS_TOKEN, _ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth)
-stream = Stream(auth, l)
 
+
+## ---------------- CHANGE SEARCH TERMS TO FIND TRENDING TAGS ------------- ##
 setTerms = ['QueenSugar', 'NicerRap', 'GOT', 'FlytheW', 'TheWalkingDead', 'pizza', 'Instagram',
                     'DesignatedSurvivor', 'Food', 'Trump']
-
-stream.filter(track=setTerms, async=True)
+## -------------- ENABLE TWITTER STREAM DURING DEMO ---------##
+stream = Stream(auth, l)
+#stream.filter(track=setTerms, async=True)
 
 
 @app.route('/')
