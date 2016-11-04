@@ -65,6 +65,7 @@
           minZoom: 1
         });
         console.log({{data.tweets|length}})
+        var markers = [];
         {% for tweet in data.tweets %}
             var marker = new google.maps.Marker({
                 position: {
@@ -82,12 +83,18 @@
                     content: this.content
                 }).open(map,this);
             });
+            markers.push(marker);
 
         {%endfor%}
+        var markerCluster = new MarkerClusterer(map, markers,{imagePath: 'static/images/m'});
 
 
-      }
+        <!--var markerCluster = new MarkerClusterer(map, markers);-->
+
+
+        }
     </script>
+    <script src="static/js/markerclusterer.js"></script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJPe38MUB6eu9VqdEG0SjTT4I9_FOziJo&callback=initMap">
     </script>

@@ -59,7 +59,7 @@ stream.filter(track=setTerms, async=True)
 def index():
     if es.indices.exists(index='twitter'):
         searchtext = setTerms[0]
-        response = es.search(index='twitter',doc_type='tweet',body={"query":{"query_string":{"query":searchtext}}},size=1000)
+        response = es.search(index='twitter',doc_type='tweet',body={"query":{"query_string":{"query":searchtext}}},size=2000)
         data = {'searchParams' : setTerms, 'tweets': response['hits']['hits'] }
         return render_template('index.html',data=data)
     else:
@@ -69,7 +69,7 @@ def index():
 def search():
     try:
         searchtext = request.form['TrendKeyword']
-        response = es.search(index='twitter', doc_type='tweet',body={"query": {"query_string": {"query": searchtext}}},size=1000)
+        response = es.search(index='twitter', doc_type='tweet',body={"query": {"query_string": {"query": searchtext}}},size=2000)
         data = {'searchParams': setTerms, 'tweets': response['hits']['hits'], 'currentSearch': searchtext}
         return render_template('index.html', data=data)
     except Exception:
