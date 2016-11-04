@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8439a59b-4ee6-418d-b8d0-51b5e98eab38" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/index.html" afterPath="$PROJECT_DIR$/templates/index.html" />
     </list>
     <ignored path="TwittMap.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -589,7 +588,14 @@
       <option name="project" value="LOCAL" />
       <updated>1478278746140</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Post Submission Commit  (Clusters)- 11/3/2016">
+      <created>1478280245442</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1478280245442</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="ToolWindowManager">
