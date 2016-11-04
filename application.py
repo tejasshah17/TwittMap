@@ -48,11 +48,11 @@ api = tweepy.API(auth)
 
 
 ## ---------------- CHANGE SEARCH TERMS TO FIND TRENDING TAGS ------------- ##
-setTerms = ['QueenSugar', 'NicerRap', 'GOT', 'FlytheW', 'TheWalkingDead', 'pizza', 'Instagram',
-                    'DesignatedSurvivor', 'Food', 'Trump']
+setTerms = ['Vote', 'Cricket', 'Instagram', 'TGIF', 'TheWalkingDead', 'pizza', 'Snapchat',
+                    'Hillary', 'Food', 'Trump']
 ## -------------- ENABLE TWITTER STREAM DURING DEMO ---------##
 stream = Stream(auth, l)
-#stream.filter(track=setTerms, async=True)
+stream.filter(track=setTerms, async=True)
 
 
 @app.route('/')
