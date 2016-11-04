@@ -1,6 +1,6 @@
 branch-defaults:
   master:
-    environment: null
+    environment: tweetmap
 global:
   application_name: TwitterMap
   branch: null
