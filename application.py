@@ -107,8 +107,8 @@ def search():
         num_tweet = 0
         return render_template('index.html', data=data)
 
-    except Exception:
-        print Exception.message
+    except Exception as e:
+        print e.message
 
 def save():
     try:
@@ -132,16 +132,19 @@ def save():
         abort(400)
 
 
-@app.route('/sns', methods=['POST'])
+@application.route('/sns', methods=['POST'])
 def sns():
-    msg_type = request.headers.get('x-amz-sns-message-type')
-    if msg_type == 'SubscriptionConfirmation':
-        return subscribe()
-    elif msg_type == 'Notification':
-        return save()
+    try:
+        print "Message Received"
+        msg_type = request.headers.get('x-amz-sns-message-type')
+        if msg_type == 'SubscriptionConfirmation':
+            return subscribe()
+        elif msg_type == 'Notification':
+            return save()
 
-    else:
-        abort(400)
+    except Exception as e:
+        print e.message
+
 
 def subscribe():
     try:
@@ -149,8 +152,8 @@ def subscribe():
         urllib2.urlopen(j['SubscribeURL'])
         return "OK"
 
-    except:
-        print Exception.message
+    except Exception as e:
+        print e.message
         abort(400)
 
 
