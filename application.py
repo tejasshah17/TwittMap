@@ -116,7 +116,9 @@ def save():
         j = request.get_json(force=True)
         message = j['Message']
         test = json.loads(message)
+        print  "Getting Sentiment from message "
         sentiment = test['sentiment']
+        print sentiment
         es.index(index="twitter",doc_type="tweet",body=json.loads(message))
 
         global new_tweet,num_tweet
@@ -145,6 +147,7 @@ def sns():
 
     except Exception as e:
         print e.message
+        abort(400)
 
 
 def subscribe():
