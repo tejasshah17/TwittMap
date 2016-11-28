@@ -32,7 +32,7 @@ class StdOutListener(StreamListener):
     def on_data(self, data):
         if data != None:
             jsonData = json.loads(data)
-            if 'contributors' in jsonData and jsonData['geo'] is not None  :
+            if 'contributors' in jsonData and jsonData['geo'] is not None  and jsonData['lang']== 'en':
                 try:
                     future = producer.send('test',jsonData)
                     #record_metadata = future.get(timeout=10)
@@ -148,9 +148,15 @@ def sns():
         abort(400)
 
 def subscribe():
-    j = request.get_json(force=True)
-    urllib2.urlopen(j['SubscribeURL'])
-    return "OK"
+    try:
+        j = request.get_json(force=True)
+        urllib2.urlopen(j['SubscribeURL'])
+        return "OK"
+
+    except:
+        print Exception.message
+        abort(400)
+
 
 @application.route('/getTweetNum',methods=['POST'])
 def getTweetsNum():
