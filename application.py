@@ -3,21 +3,19 @@ from tweepy.streaming import StreamListener
 from tweepy import Stream
 from elasticsearch import Elasticsearch
 import time
-from flask import Flask,render_template,request,abort,g
+from flask import Flask,render_template,request,abort
 import json
 
 from kafka import KafkaProducer
 from kafka.errors import KafkaError
-from watson_developer_cloud import AlchemyLanguageV1,WatsonException
-import  urllib2
+import urllib2
+
 
 _CONSUMER_KEY = 'IDRWiVEJxA5BLbbLxfK5HVkjd'
 _CONSUMER_SEC_KEY = 'RKCIS6bcVxIULPOPbaYsNkqbJco6rifTtsckUstXVOqCfiGR67'
 _ACCESS_TOKEN = '789914399427403776-GZZAcCDOMIqS9fbDIRMsISam1D7oLWY'
 _ACCESS_TOKEN_SECRET = 'GbqFwczOAQfOtr8KQGfF5aoebWXQhfpOBKM3oGOrzbwmA'
 
-
-alchemy_language = AlchemyLanguageV1(api_key='6be2f24db30c9b2e9bdc542f396033d6d82922d4')
 
 try:
 
@@ -42,8 +40,7 @@ class StdOutListener(StreamListener):
                 except KafkaError,Exception:
                     print KafkaError
                     print Exception
-                except WatsonException as e:
-                    print 'Exception' - e.message
+
 
 
     def on_error(self, status):
