@@ -112,6 +112,7 @@ def search():
 
 def save():
     try:
+        print "Saving Message on ES"
         j = request.get_json(force=True)
         message = j['Message']
         test = json.loads(message)

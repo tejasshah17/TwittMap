@@ -26,12 +26,12 @@
       <file leaf-file-name="application.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1234">
-              <caret line="156" column="16" selection-start-line="156" selection-start-column="16" selection-end-line="156" selection-end-column="16" />
+            <state relative-caret-position="-343">
+              <caret line="114" column="35" selection-start-line="114" selection-start-column="35" selection-end-line="114" selection-end-column="35" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
                 <element signature="e#762#1564#0" expanded="false" />
-                <element signature="e#4587#5057#0" expanded="false" />
+                <element signature="e#4624#5094#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -608,7 +608,14 @@
       <option name="project" value="LOCAL" />
       <updated>1480368662805</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Assignment 2 Sentiment Analysis - 11/27/2016">
+      <created>1480375090949</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1480375090949</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -700,7 +707,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/application.py</url>
-          <line>114</line>
+          <line>115</line>
           <option name="timeStamp" value="68" />
         </line-breakpoint>
       </breakpoints>
@@ -1035,12 +1042,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1234">
-          <caret line="156" column="16" selection-start-line="156" selection-start-column="16" selection-end-line="156" selection-end-column="16" />
+        <state relative-caret-position="-343">
+          <caret line="114" column="35" selection-start-line="114" selection-start-column="35" selection-end-line="114" selection-end-column="35" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
             <element signature="e#762#1564#0" expanded="false" />
-            <element signature="e#4587#5057#0" expanded="false" />
+            <element signature="e#4624#5094#0" expanded="false" />
           </folding>
         </state>
       </provider>
