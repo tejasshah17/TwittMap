@@ -3,14 +3,12 @@ from tweepy.streaming import StreamListener
 from tweepy import Stream
 from elasticsearch import Elasticsearch
 import time
-from flask import Flask,render_template,request,abort
+from flask import Flask,render_template,request,abort,g
 import json
-import jinja2
 
-from kafka import KafkaProducer,KafkaConsumer
+from kafka import KafkaProducer
 from kafka.errors import KafkaError
 from watson_developer_cloud import AlchemyLanguageV1,WatsonException
-import boto.sns
 import  urllib2
 
 _CONSUMER_KEY = 'IDRWiVEJxA5BLbbLxfK5HVkjd'
@@ -25,9 +23,6 @@ try:
 
     producer = KafkaProducer(bootstrap_servers=['localhost:9092'],
                              value_serializer=lambda v: json.dumps(v).encode('utf-8'))
-
-    #consumer = KafkaConsumer('test',bootstrap_servers=['localhost:9092'],value_deserializer=lambda m: json.loads(m.decode('utf-8')))
-
 
 except KafkaError:
     print KafkaError
@@ -67,7 +62,9 @@ class StdOutListener(StreamListener):
 application = Flask(__name__)
 app = application
 
-## --------------KAFKA ----------------------##
+
+new_tweet = False
+num_tweet = 0
 
 
 ## -------------- SETUP ELASTICSEARCH -------------- ##
@@ -88,7 +85,6 @@ setTerms = ['TheEllenShow', 'Cricket', 'Instagram', 'Subway', 'TheWalkingDead', 
 ## -------------- ENABLE TWITTER STREAM DURING DEMO ---------##
 stream = Stream(auth, l)
 stream.filter(track=setTerms, async=True)
-num_tweets = 0
 
 @app.route('/')
 def index():
@@ -96,9 +92,11 @@ def index():
         searchtext = setTerms[0]
         response = es.search(index='twitter',doc_type='tweet',body={"query":{"query_string":{"query":searchtext}}},size=2000)
         data = {'searchParams' : setTerms, 'tweets': response['hits']['hits'] }
-        global  num_tweets
-        num_tweets = 0
+        global new_tweet,num_tweet
+        new_tweet = False
+        num_tweet = 0
         return render_template('index.html',data=data)
+
     else:
         return 'Welcome to TwitterTrends HomePage <br> False'
 
@@ -108,9 +106,11 @@ def search():
         searchtext = request.form['TrendKeyword']
         response = es.search(index='twitter', doc_type='tweet',body={"query": {"query_string": {"query": searchtext}}},size=2000)
         data = {'searchParams': setTerms, 'tweets': response['hits']['hits'], 'currentSearch': searchtext}
-        global num_tweets
-        num_tweets = 0
+        global new_tweet,num_tweet
+        new_tweet = False
+        num_tweet = 0
         return render_template('index.html', data=data)
+
     except Exception:
         print Exception.message
 
@@ -120,15 +120,20 @@ def save():
         message = j['Message']
         test = json.loads(message)
         sentiment = test['sentiment']
-        es.index(index="twitter",
-                 doc_type="tweet",
-                 body=json.loads(message))
-        global num_tweets
-        num_tweets =+ 1
+        es.index(index="twitter",doc_type="tweet",body=json.loads(message))
+
+        global new_tweet,num_tweet
+        print str(new_tweet) + "-" + str(num_tweet)
+
+        new_tweet = True
+        num_tweet += 1
+
+        print str(new_tweet) + "-" + str(num_tweet)
         return "OK"
 
-    except Exception:
-        print Exception
+    except Exception as e:
+        print e.message
+        abort(400)
 
 
 @application.route('/sns', methods=['POST'])
@@ -151,14 +156,21 @@ def subscribe():
 def getTweetsNum():
     try:
         tweet = int(request.form['num'])
-        global num_tweets
-        if num_tweets > tweet:
-            return 'Success'
+        global new_tweet,num_tweet
+        if new_tweet:
+            val = '%s New Tweets Available\nPlease Refresh to view' %num_tweet
+            response = json.dumps({'return_code':1,'value':val})
+            return response
         else:
-            return 'Fail'
+            response = json.dumps({'return_code': 0, 'value': 'No New Tweets !!'})
+            return response
 
-    except Exception:
-        print Exception
+    except Exception as e:
+        print e.message
+        abort(400)
+
+
+
 
 if __name__ == '__main__':
     try:

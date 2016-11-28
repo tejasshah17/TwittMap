@@ -9,30 +9,43 @@
         width: 100%;
        }
        .btn {
-          background: #3498db;
-          background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
-          background-image: -moz-linear-gradient(top, #3498db, #2980b9);
-          background-image: -ms-linear-gradient(top, #3498db, #2980b9);
-          background-image: -o-linear-gradient(top, #3498db, #2980b9);
-          background-image: linear-gradient(to bottom, #3498db, #2980b9);
-          -webkit-border-radius: 11;
-          -moz-border-radius: 11;
-          border-radius: 11px;
-          font-family: Arial;
-          color: #ffffff;
+          background: #428BCA;
+          color: #fff;
+          font-family: Sans-serif;
           font-size: 20px;
-          padding: 5px 10px 5px 10px;
-          text-decoration: none;
+          height: 30px;
+          width: 150px;
+          text-align: center;
+          border: 0;
+          transition: all 0.3s ease 0s;
+          border-radius:35px;
        }
 
         .btn:hover {
-          background: #3cb0fd;
-          background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-          background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-          background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-          background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-          background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-          text-decoration: none;
+            background: #CF4647;
+        }
+
+
+        .select-style {
+            border: 1px solid #ccc;
+            width: 120px;
+            border-radius: 3px;
+            overflow: hidden;
+            background: #fafafa url("img/icon-select.png") no-repeat 90% 50%;
+        }
+
+        .select-style select {
+            padding: 5px 8px;
+            width: 130%;
+            border: none;
+            box-shadow: none;
+            background: transparent;
+            background-image: none;
+            -webkit-appearance: none;
+        }
+
+        .select-style select:focus {
+            outline: none;
         }
     </style>
     <link rel="stylesheet" href="static\css\alertify.css" />
@@ -43,7 +56,7 @@
     <p>
         <form method="POST">
             Please Choose your Trending Keyword :
-            <select name="TrendKeyword">
+            <select name="TrendKeyword" class="select-style">
             {% for params in data.searchParams %}
                 {% if params == data.currentSearch %}
                     <option value="{{params}}" selected="true">{{params }}</option>
@@ -121,27 +134,35 @@
              alertify.set('notifier','delay', 10);
              alertify.set('notifier','position', 'top-right');
              alertify.success('Current delay : ' + alertify.get('notifier','delay') + ' seconds');
+             setInterval(test,15000);
+        })
 
-        });
 
-        window.onload= function(){
-            setTimeout(test,15000);
-        }
 
         function test(){
             var num = $('#tweetNum').text();
+            var delay = alertify.get('notifier','delay');
+            alertify.set('notifier','delay', 5);
+            alertify.set('notifier','position', 'top-right');
 
-            alert(num);
             console.log(num);
             $.ajax({
                 url: '/getTweetNum',
                 data: { 'num' : num} ,
                 type: 'POST',
+                dataType: "json",
                 success: function(response) {
                     console.log(response);
+                    if (response.return_code == 1) {
+                        alertify.success(response.value)
+                    }else{
+                        alertify.message(response.value)
+                    }
+
                 },
                 error: function(error) {
                     console.log(error);
+                    alertify.error(error);
                 }
             });
         }
