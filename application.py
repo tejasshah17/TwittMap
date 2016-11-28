@@ -21,8 +21,7 @@ alchemy_language = AlchemyLanguageV1(api_key='6be2f24db30c9b2e9bdc542f396033d6d8
 
 try:
 
-    producer = KafkaProducer(bootstrap_servers=['localhost:9092'],
-                             value_serializer=lambda v: json.dumps(v).encode('utf-8'))
+    producer = KafkaProducer(bootstrap_servers=['localhost:9092'],value_serializer=lambda v: json.dumps(v).encode('utf-8'))
 
 except KafkaError:
     print KafkaError
@@ -136,7 +135,7 @@ def save():
         abort(400)
 
 
-@application.route('/sns', methods=['POST'])
+@app.route('/sns', methods=['POST'])
 def sns():
     msg_type = request.headers.get('x-amz-sns-message-type')
     if msg_type == 'SubscriptionConfirmation':
