@@ -78,7 +78,7 @@
           zoom: 2,
           minZoom: 1
         });
-        console.log({{data.tweets|length}})
+        //console.log({{data.tweets|length}} + " Tweets Found")
 
         var markers = [];
         {% for tweet in data.tweets %}
@@ -130,11 +130,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
     <script>
         $(document).ready(function(){
-             var delay = alertify.get('notifier','delay');
-             alertify.set('notifier','delay', 10);
-             alertify.set('notifier','position', 'top-right');
-             alertify.success('Current delay : ' + alertify.get('notifier','delay') + ' seconds');
-             setInterval(test,15000);
+
+             setInterval(test,20000);
         })
 
 
