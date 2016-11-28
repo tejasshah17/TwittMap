@@ -35,7 +35,8 @@
           text-decoration: none;
         }
     </style>
-
+    <link rel="stylesheet" href="static\css\alertify.css" />
+    <link rel="stylesheet" href="static\css\themes\bootstrap.css" />
 </head>
 <body>
     <h3>My Tweet Map Demo</h3>
@@ -54,7 +55,7 @@
             <input type="submit" class="btn" value="Search Tweets">
         </form>
     </p>
-    {{data.tweets|length}} Tweets Found
+    <span id="tweetNum">{{data.tweets|length}} </span> Tweets Found
 
     <div id="map"></div>
     <script>
@@ -65,15 +66,29 @@
           minZoom: 1
         });
         console.log({{data.tweets|length}})
+
         var markers = [];
         {% for tweet in data.tweets %}
+            var sname = "@" + {{tweet._source.user.screen_name|tojson}};
+            {% if tweet._source.sentiment %}
+                var sentiment = {{tweet._source.sentiment|tojson}}
+                console.log(sentiment);
+            {% endif %}
+
             var marker = new google.maps.Marker({
                 position: {
                     lat:{{tweet._source.geo.coordinates[0]}},
                     lng:{{tweet._source.geo.coordinates[1]}}
                 },
                 map: map,
-                content:"<h3>@{{tweet._source.user.screen_name.text|replace('\n','')|e}}</h3>"
+                {% if tweet._source.sentiment == 'positive' %}
+                icon: "static/images/m6.png",
+                {% elif tweet._source.sentiment == 'negative' %}
+                icon: "static/images/m7.png",
+                {% elif tweet._source.sentiment == 'neutral' %}
+                icon: "static/images/m8.png",
+                {% endif %}
+                content:"<h3>"+ sname +"</h3>"
                  +"<h4>{{tweet._source.user.name.text|replace('\n','')|e}}</h4>"
                  +"<p>{{tweet._source.text|replace('\n','')|e}}</p>"
 
@@ -97,6 +112,40 @@
     <script src="static/js/markerclusterer.js"></script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJPe38MUB6eu9VqdEG0SjTT4I9_FOziJo&callback=initMap">
+    </script>
+    <script src="static\js\alertify.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+    <script>
+        $(document).ready(function(){
+             var delay = alertify.get('notifier','delay');
+             alertify.set('notifier','delay', 10);
+             alertify.set('notifier','position', 'top-right');
+             alertify.success('Current delay : ' + alertify.get('notifier','delay') + ' seconds');
+
+        });
+
+        window.onload= function(){
+            setTimeout(test,15000);
+        }
+
+        function test(){
+            var num = $('#tweetNum').text();
+
+            alert(num);
+            console.log(num);
+            $.ajax({
+                url: '/getTweetNum',
+                data: { 'num' : num} ,
+                type: 'POST',
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+
     </script>
 
 </body>
