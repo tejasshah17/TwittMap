@@ -40,8 +40,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="505">
-              <caret line="104" column="77" selection-start-line="104" selection-start-column="77" selection-end-line="104" selection-end-column="77" />
+            <state relative-caret-position="461">
+              <caret line="87" column="18" selection-start-line="87" selection-start-column="18" selection-end-line="87" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -671,7 +671,14 @@
       <option name="project" value="LOCAL" />
       <updated>1480398819730</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="11/27/2016 - Trailing BackSlash - Assignment 2 Sentiment Analysis-">
+      <created>1480400239500</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1480400239500</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -741,7 +748,8 @@
     <MESSAGE value="Post Submission Commit  (Clusters)- 11/3/2016" />
     <MESSAGE value="Assignment 2 Sentiment Analysis - 11/3/2016" />
     <MESSAGE value="Assignment 2 Sentiment Analysis - 11/27/2016" />
-    <option name="LAST_COMMIT_MESSAGE" value="Assignment 2 Sentiment Analysis - 11/27/2016" />
+    <MESSAGE value="11/27/2016 - Trailing BackSlash - Assignment 2 Sentiment Analysis-" />
+    <option name="LAST_COMMIT_MESSAGE" value="11/27/2016 - Trailing BackSlash - Assignment 2 Sentiment Analysis-" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1104,8 +1112,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="505">
-          <caret line="104" column="77" selection-start-line="104" selection-start-column="77" selection-end-line="104" selection-end-column="77" />
+        <state relative-caret-position="461">
+          <caret line="87" column="18" selection-start-line="87" selection-start-column="18" selection-end-line="87" selection-end-column="18" />
           <folding />
         </state>
       </provider>
