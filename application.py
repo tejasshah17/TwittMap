@@ -68,19 +68,26 @@ es = Elasticsearch()
 es.indices.create(index='twitter', ignore=400)
 
 ## ------------- START TWITTER API STREAMING -------------##
-l = StdOutListener()
-auth = tweepy.OAuthHandler(_CONSUMER_KEY, _CONSUMER_SEC_KEY)
-auth.set_access_token(_ACCESS_TOKEN, _ACCESS_TOKEN_SECRET)
-api = tweepy.API(auth)
+try:
+    l = StdOutListener()
+    auth = tweepy.OAuthHandler(_CONSUMER_KEY, _CONSUMER_SEC_KEY)
+    auth.set_access_token(_ACCESS_TOKEN, _ACCESS_TOKEN_SECRET)
+    api = tweepy.API(auth)
 
 
-## ---------------- CHANGE SEARCH TERMS TO FIND TRENDING TAGS ------------- ##
-setTerms = ['TheEllenShow', 'Cricket', 'Instagram', 'Subway', 'TheWalkingDead', 'pizza', 'Snapchat',
-                   'NYC', 'Food', 'Trump']
 
-## -------------- ENABLE TWITTER STREAM DURING DEMO ---------##
-stream = Stream(auth, l)
-stream.filter(track=setTerms, async=True)
+    ## ---------------- CHANGE SEARCH TERMS TO FIND TRENDING TAGS ------------- ##
+    setTerms = ['TheEllenShow', 'Cricket', 'Instagram', 'Subway', 'TheWalkingDead', 'pizza', 'Snapchat',
+                       'NYC', 'Food', 'Trump']
+
+    ## -------------- ENABLE TWITTER STREAM DURING DEMO ---------##
+    stream = Stream(auth, l)
+    stream.filter(track=setTerms, async=True)
+
+except Exception as e:
+    print e.message
+
+
 
 @app.route('/')
 def index():
