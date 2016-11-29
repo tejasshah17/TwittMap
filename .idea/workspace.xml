@@ -26,14 +26,12 @@
       <file leaf-file-name="application.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="301">
-              <caret line="157" column="0" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
+            <state relative-caret-position="418">
+              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
-                <element signature="e#762#1564#0" expanded="false" />
-                <element signature="e#2985#3467#0" expanded="false" />
-                <element signature="e#3485#4101#0" expanded="false" />
-                <element signature="e#4510#4689#0" expanded="false" />
+                <element signature="e#2935#3417#0" expanded="false" />
+                <element signature="e#4460#4639#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -659,7 +657,14 @@
       <option name="project" value="LOCAL" />
       <updated>1480382448423</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Assignment 2 Sentiment Analysis - 11/27/2016">
+      <created>1480385952669</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1480385952669</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -751,7 +756,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/application.py</url>
-          <line>122</line>
+          <line>118</line>
           <option name="timeStamp" value="68" />
         </line-breakpoint>
       </breakpoints>
@@ -1088,14 +1093,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="157" column="0" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
+        <state relative-caret-position="418">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <element signature="e#762#1564#0" expanded="false" />
-            <element signature="e#2985#3467#0" expanded="false" />
-            <element signature="e#3485#4101#0" expanded="false" />
-            <element signature="e#4510#4689#0" expanded="false" />
+            <element signature="e#2935#3417#0" expanded="false" />
+            <element signature="e#4460#4639#0" expanded="false" />
           </folding>
         </state>
       </provider>

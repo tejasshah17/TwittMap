@@ -17,12 +17,8 @@ _ACCESS_TOKEN = '789914399427403776-GZZAcCDOMIqS9fbDIRMsISam1D7oLWY'
 _ACCESS_TOKEN_SECRET = 'GbqFwczOAQfOtr8KQGfF5aoebWXQhfpOBKM3oGOrzbwmA'
 
 
-try:
+producer = KafkaProducer(bootstrap_servers=['localhost:9092'],value_serializer=lambda v: json.dumps(v).encode('utf-8'))
 
-    producer = KafkaProducer(bootstrap_servers=['localhost:9092'],value_serializer=lambda v: json.dumps(v).encode('utf-8'))
-
-except KafkaError:
-    print KafkaError
 
 class StdOutListener(StreamListener):
 
