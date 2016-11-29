@@ -93,14 +93,14 @@ except Exception as e:
 def index():
     if not es.indices.exists(index='twitter'):
         es.indices.create(index='twitter', ignore=400)
-    else:
-        searchtext = setTerms[0]
-        response = es.search(index='twitter',doc_type='tweet',body={"query":{"query_string":{"query":searchtext}}},size=2500)
-        data = {'searchParams' : setTerms, 'tweets': response['hits']['hits'] }
-        global new_tweet,num_tweet
-        new_tweet = False
-        num_tweet = 0
-        return render_template('index.html',data=data)
+
+    searchtext = setTerms[0]
+    response = es.search(index='twitter',doc_type='tweet',body={"query":{"query_string":{"query":searchtext}}},size=2500)
+    data = {'searchParams' : setTerms, 'tweets': response['hits']['hits'] }
+    global new_tweet,num_tweet
+    new_tweet = False
+    num_tweet = 0
+    return render_template('index.html',data=data)
 
 
 @app.route('/',methods=['POST'])
