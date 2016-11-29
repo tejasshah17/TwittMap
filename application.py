@@ -116,7 +116,6 @@ def save():
         j = request.get_json(force=True)
         message = j['Message']
         test = json.loads(message)
-        print message
         print  "Getting Sentiment from message "
         sentiment = test['sentiment']
         print sentiment
