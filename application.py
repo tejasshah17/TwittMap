@@ -84,7 +84,9 @@ stream.filter(track=setTerms, async=True)
 
 @app.route('/')
 def index():
-    if es.indices.exists(index='twitter'):
+    if not es.indices.exists(index='twitter'):
+        es.indices.create(index='twitter', ignore=400)
+    else:
         searchtext = setTerms[0]
         response = es.search(index='twitter',doc_type='tweet',body={"query":{"query_string":{"query":searchtext}}},size=2500)
         data = {'searchParams' : setTerms, 'tweets': response['hits']['hits'] }
@@ -93,8 +95,6 @@ def index():
         num_tweet = 0
         return render_template('index.html',data=data)
 
-    else:
-        return 'Welcome to TwitterTrends HomePage <br> False'
 
 @app.route('/',methods=['POST'])
 def search():
