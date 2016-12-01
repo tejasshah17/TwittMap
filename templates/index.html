@@ -82,12 +82,9 @@
         var markers = [];
         {% for tweet in data.tweets %}
             var sname = "@" + {{tweet._source.user.screen_name|replace('\n','')|e}};
-            var uname = {{tweet._source.user.name.text|safe|replace('\n','')|e}};
-            var text = {{tweet._source.text|safe|replace('\n','')|e}};
-            {% if tweet._source.sentiment %}
-                var sentiment = {{tweet._source.sentiment|tojson}};
+            var uname = {{tweet._source.user.name.text|replace('\n','')|e}};
+            var text = {{tweet._source.text|replace('\n','')|e}};
 
-            {% endif %}
             var marker = new google.maps.Marker({
                 position: {
                     lat:{{tweet._source.geo.coordinates[0]}},
