@@ -31,6 +31,7 @@ class StdOutListener(StreamListener):
                     #record_metadata = future.get(timeout=10)
 
                     print "Data Inserted"
+                    producer.flush()
                     return True
 
                 except KafkaError,Exception:
