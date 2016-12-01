@@ -30,7 +30,13 @@ class StdOutListener(StreamListener):
             if 'contributors' in jsonData and jsonData['geo'] is not None  and jsonData['lang']== 'en':
                 try:
                     if producer is None:
-                        return True
+                        global  producer
+                        try:
+                            producer = KafkaProducer(bootstrap_servers=['localhost:9092'],value_serializer=lambda v: json.dumps(v).encode('utf-8'))
+                        except:
+                            producer = None
+                            return True
+
                     future = producer.send('test',jsonData)
                     #record_metadata = future.get(timeout=10)
 
