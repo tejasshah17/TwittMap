@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8439a59b-4ee6-418d-b8d0-51b5e98eab38" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/index.html" afterPath="$PROJECT_DIR$/templates/index.html" />
     </list>
     <ignored path="TwittMap.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -341,13 +340,6 @@
       <option name="presentableId" value="Default" />
       <updated>1477165026872</updated>
     </task>
-    <task id="LOCAL-00014" summary="Post Submission Commit">
-      <created>1477665068897</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1477665068897</updated>
-    </task>
     <task id="LOCAL-00015" summary="Post Submission Commit - 10/31/2016">
       <created>1477894710914</created>
       <option name="number" value="00015" />
@@ -684,7 +676,14 @@
       <option name="project" value="LOCAL" />
       <updated>1480571593145</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="11/30/2016 - Trailing BackSlash - Assignment 2 Sentiment Analysis-">
+      <created>1480572008489</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1480572008489</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="ToolWindowManager">
