@@ -91,7 +91,7 @@ def index():
         es.indices.create(index='twitter', ignore=400)
 
     searchtext = setTerms[0]
-    response = es.search(index='twitter',doc_type='tweet',body={"query":{"query_string":{"query":searchtext}}},size=1500)
+    response = es.search(index='twitter',doc_type='tweet',body={"query":{"query_string":{"query":searchtext}}},size=1000)
     data = {'searchParams' : setTerms, 'tweets': response['hits']['hits'] }
     global new_tweet,num_tweet
     new_tweet = False
@@ -103,7 +103,7 @@ def index():
 def search():
     try:
         searchtext = request.form['TrendKeyword']
-        response = es.search(index='twitter', doc_type='tweet',body={"query": {"query_string": {"query": searchtext}}},size=2500)
+        response = es.search(index='twitter', doc_type='tweet',body={"query": {"query_string": {"query": searchtext}}},size=1000)
         data = {'searchParams': setTerms, 'tweets': response['hits']['hits'], 'currentSearch': searchtext}
         global new_tweet,num_tweet
         new_tweet = False

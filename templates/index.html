@@ -78,7 +78,6 @@
           zoom: 2,
           minZoom: 1
         });
-        //console.log({{data.tweets|length}} + " Tweets Found")
 
         var markers = [];
         {% for tweet in data.tweets %}
@@ -87,8 +86,6 @@
                 var sentiment = {{tweet._source.sentiment|tojson}}
 
             {% endif %}
-            console.log({{tweet._source.user.name.text|replace('\n','')|e}})
-            console.log({{tweet._source.text|replace('\n','')|e}})
             var marker = new google.maps.Marker({
                 position: {
                     lat:{{tweet._source.geo.coordinates[0]}},
@@ -102,7 +99,7 @@
                 {% elif tweet._source.sentiment == 'neutral' %}
                 icon: "static/images/m8.png",
                 {% endif %}
-                content:"<h3>"+ sname +</h3>"
+                content:"<h3>"+ sname +"</h3>"
                  +"<h4>{{tweet._source.user.name.text|replace('\n','')|e}}</h4>"
                  +"<p>{{tweet._source.text|replace('\n','')|e}}</p>"
 
@@ -118,10 +115,9 @@
         var markerCluster = new MarkerClusterer(map, markers,{imagePath: 'static/images/m'});
 
 
-        <!--var markerCluster = new MarkerClusterer(map, markers);-->
 
 
-    }
+    };
     </script>
     <script src="static/js/markerclusterer.js"></script>
     <script async defer
