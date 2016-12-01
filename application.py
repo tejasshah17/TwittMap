@@ -30,7 +30,7 @@ class StdOutListener(StreamListener):
                     future = producer.send('test',jsonData)
                     #record_metadata = future.get(timeout=10)
 
-                    #print "Data Inserted"
+                    print "Data Inserted"
                     return True
 
                 except KafkaError,Exception:
@@ -91,7 +91,7 @@ def index():
         es.indices.create(index='twitter', ignore=400)
 
     searchtext = setTerms[0]
-    response = es.search(index='twitter',doc_type='tweet',body={"query":{"query_string":{"query":searchtext}}},size=2500)
+    response = es.search(index='twitter',doc_type='tweet',body={"query":{"query_string":{"query":searchtext}}},size=1500)
     data = {'searchParams' : setTerms, 'tweets': response['hits']['hits'] }
     global new_tweet,num_tweet
     new_tweet = False
