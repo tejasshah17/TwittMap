@@ -82,6 +82,8 @@
         var markers = [];
         {% for tweet in data.tweets %}
             var sname = "@" + {{tweet._source.user.screen_name|replace('\n','')|e}};
+            var uname = {{tweet._source.user.name.text|safe}}
+            var text = {{tweet._source.text|safe|replace('\n','')|e}}
             {% if tweet._source.sentiment %}
                 var sentiment = {{tweet._source.sentiment|tojson}}
 
@@ -99,9 +101,7 @@
                 {% elif tweet._source.sentiment == 'neutral' %}
                 icon: "static/images/m8.png",
                 {% endif %}
-                content:"<h3>"+ sname +"</h3>"
-                 +"<h4>{{tweet._source.user.name.text|safe|replace('\n','')|e}}</h4>"
-                 +"<p>{{tweet._source.text|safe|replace('\n','')|e}}</p>"
+                content:"<h3>"+ sname +"</h3><h4>" + uname + "</h4> <p>" + text + "</p>"
 
             });
             marker.addListener('click', function() {
@@ -128,7 +128,7 @@
     <script>
         $(document).ready(function(){
 
-             setInterval(test,20000);
+             setInterval(test,30000);
         })
 
 
