@@ -16,9 +16,11 @@ _CONSUMER_SEC_KEY = 'RKCIS6bcVxIULPOPbaYsNkqbJco6rifTtsckUstXVOqCfiGR67'
 _ACCESS_TOKEN = '789914399427403776-GZZAcCDOMIqS9fbDIRMsISam1D7oLWY'
 _ACCESS_TOKEN_SECRET = 'GbqFwczOAQfOtr8KQGfF5aoebWXQhfpOBKM3oGOrzbwmA'
 
-
-producer = KafkaProducer(bootstrap_servers=['localhost:9092'],value_serializer=lambda v: json.dumps(v).encode('utf-8'))
-
+try:
+    producer = KafkaProducer(bootstrap_servers=['localhost:9092'],value_serializer=lambda v: json.dumps(v).encode('utf-8'))
+except:
+    producer =None
+    pass
 
 class StdOutListener(StreamListener):
 
@@ -27,6 +29,8 @@ class StdOutListener(StreamListener):
             jsonData = json.loads(data)
             if 'contributors' in jsonData and jsonData['geo'] is not None  and jsonData['lang']== 'en':
                 try:
+                    if producer is None:
+                        return True
                     future = producer.send('test',jsonData)
                     #record_metadata = future.get(timeout=10)
 
