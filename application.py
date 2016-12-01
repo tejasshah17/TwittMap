@@ -74,7 +74,7 @@ try:
 
 
     ## ---------------- CHANGE SEARCH TERMS TO FIND TRENDING TAGS ------------- ##
-    setTerms = ['TheEllenShow', 'Cricket', 'Instagram', 'Subway', 'TheWalkingDead', 'pizza', 'Snapchat',
+    setTerms = ['Ellen Show', 'Cricket', 'Instagram', 'Subway', 'Games of Thrones', 'Pizza', 'Snapchat',
                        'NYC', 'Food', 'Trump']
 
     ## -------------- ENABLE TWITTER STREAM DURING DEMO ---------##

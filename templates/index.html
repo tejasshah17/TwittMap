@@ -100,8 +100,8 @@
                 icon: "static/images/m8.png",
                 {% endif %}
                 content:"<h3>"+ sname +"</h3>"
-                 +"<h4>{{tweet._source.user.name.text|replace('\n','')|e}}</h4>"
-                 +"<p>{{tweet._source.text|replace('\n','')|e}}</p>"
+                 +"<h4>{{tweet._source.user.name.text|safe|replace('\n','')|e}}</h4>"
+                 +"<p>{{tweet._source.text|safe|replace('\n','')|e}}</p>"
 
             });
             marker.addListener('click', function() {
