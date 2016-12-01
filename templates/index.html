@@ -82,7 +82,7 @@
         var markers = [];
         {% for tweet in data.tweets %}
             var sname = "@" + {{tweet._source.user.screen_name|replace('\n','')|e}};
-            //var uname = {{tweet._source.user.name.text|safe}};
+            var uname = {{tweet._source.user.name.text|safe|replace('\n','')|e}};
             var text = {{tweet._source.text|safe|replace('\n','')|e}};
             {% if tweet._source.sentiment %}
                 var sentiment = {{tweet._source.sentiment|tojson}};
