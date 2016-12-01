@@ -82,7 +82,6 @@
         var markers = [];
         {% for tweet in data.tweets %}
             var sname = "@" + {{tweet._source.user.screen_name|replace('\n','')|e}};
-            var uname = {{tweet._source.user.name.text|replace('\n','')|e}};
             var text = {{tweet._source.text|replace('\n','')|e}};
 
             var marker = new google.maps.Marker({
@@ -98,7 +97,7 @@
                 {% elif tweet._source.sentiment == 'neutral' %}
                 icon: "static/images/m8.png",
                 {% endif %}
-                content:"<h3>"+ sname +"</h3><h4>" + uname + "</h4> <p>" + text + "</p>"
+                content:"<h3>"+ sname +"</h3> <p>" + text + "</p>"
 
             });
             marker.addListener('click', function() {
